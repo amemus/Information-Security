@@ -18,6 +18,22 @@ void encrypt(char *plaintext,int key)
         
     }
 }
+void decrypt(char* ciphertext, int key)
+{
+    int i = 0;
+    while(ciphertext[i] != '\0')
+    {
+        if(ciphertext[i] >= 'A' && ciphertext[i] <= 'Z' )
+        {
+            ciphertext[i] = (((((ciphertext[i] - 'A')- key)+ 26) % 26)+ 'A');
+        }
+          if(ciphertext[i] >= 'a' && ciphertext[i] <= 'z' )
+          {
+            ciphertext[i] = (((((ciphertext[i] - 'a')- key)+ 26) % 26)+ 'a');
+          }
+          i++;
+    }
+}
 
 int main()
 {
@@ -29,7 +45,11 @@ int main()
     cout << "Enter the key:";
     cin>>key;
     encrypt(name, key);
-    cout << "Name: " << name << endl;
+    cout << "Cipher: " << name << endl;
+
+    decrypt(name,key);
+    cout << "Decipher:" << name << endl;
+    
     
 
     return 0;
